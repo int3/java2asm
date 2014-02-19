@@ -7,7 +7,7 @@ transformer.jar: PreMain.class ClassAdapterFactory.class MANIFEST.MF
 rewriter: Rewriter.class ClassAdapterFactory.class
 
 ClassAdapterFactory.java: $(PATCHES) translator.py
-	python translator.py $(PATCHES) > $@
+	python translator.py $(PATCHES)
 
 %.class: %.java
 	$(JAVAC) -cp asm-4.1.jar:. $^

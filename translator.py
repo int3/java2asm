@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import string
 import javatools
 import javatools.opcodes as opcodes
@@ -12,17 +14,17 @@ def escaped_name(name):
     def f(matchobj):
         s = matchobj.group(0)
         hm = {
-            '/': '__slash__',
-            '(': '__lparen__',
-            ')': '__rparen__',
-            ';': '__semicolon__',
+            '/': u'αsα',
+            '(': u'αlα',
+            ')': u'αrα',
+            ';': u'αscα',
         }
         return hm[s]
     return re.sub("[/();]", f, name)
 
 def fill_template(template, **kwargs):
     def f(match_name, indent=''):
-        return indent + ("\n" + indent).join(str(kwargs[match_name]).split('\n'))
+        return indent + ("\n" + indent).join(unicode(kwargs[match_name]).split('\n'))
     return re.sub("<%(\w+)%>", lambda m: f(m.group(1)),
            re.sub("(.*)<%(\w+)%>", lambda m: f(m.group(2), m.group(1)), template, flags=re.MULTILINE))
 
@@ -157,4 +159,6 @@ if __name__ == '__main__':
     for arg in sys.argv:
         jci = javatools.unpack_class(open(sys.argv[1]))
         translator.handle_class(jci)
-    print translator.java_code()
+    import codecs
+    with codecs.open('ClassAdapterFactory.java', encoding='utf-8', mode='w') as f:
+        f.write(translator.java_code())
