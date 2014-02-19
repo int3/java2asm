@@ -1,8 +1,9 @@
 JAVAC := javac
 PATCHES := Test.class
+TRANSFORMER_JAR := transformer.jar
 
-transformer.jar: PreMain.class ClassAdapterFactory.class MANIFEST.MF
-	jar cvfm transformer.jar MANIFEST.MF *.class
+$(TRANSFORMER_JAR): PreMain.class ClassAdapterFactory.class MANIFEST.MF
+	jar cvfm $(TRANSFORMER_JAR) MANIFEST.MF *.class
 
 rewriter: Rewriter.class ClassAdapterFactory.class
 
