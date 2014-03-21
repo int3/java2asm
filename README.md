@@ -9,7 +9,8 @@ Basically, it parses `javac`'s classfile output and creates a
 Dependencies
 ------------
 
-[My fork of python-javatools.][2] Put it somewhere on your PYTHONPATH.
+[python-javatools][2] version >= 1.4.0. Currently PyPI only has 1.3.0, so
+install it from GitHub.
 
 [asm-4.1.jar][3]. Put this in the source directory.
 
@@ -44,5 +45,5 @@ Example
 `javac Example.java && PATCHES=Example.class make`
 
 [1]:http://asm.ow2.org/
-[2]:https://github.com/int3/python-javatools
+[2]:https://github.com/obriencj/python-javatools
 [3]:http://forge.ow2.org/project/download.php?group_id=23&file_id=18542
