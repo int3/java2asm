@@ -2,18 +2,18 @@ JAVAC := javac
 PATCHES := Test.class
 TRANSFORMER_JAR := transformer.jar
 
-$(TRANSFORMER_JAR): Transformer.class ClassAdapterFactory.class MANIFEST.MF
-	jar cvf $(TRANSFORMER_JAR) *.class
+$(TRANSFORMER_JAR): build/transformer/Transformer.class build/transformer/ClassAdapterFactory.class MANIFEST.MF
+	jar cvf $(TRANSFORMER_JAR) -C build .
 
-rewriter: Rewriter.class ClassAdapterFactory.class
+rewriter: build/transformer/Rewriter.class build/transformer/ClassAdapterFactory.class
 
 ClassAdapterFactory.java: $(PATCHES) translator.py
 	python translator.py $(PATCHES)
 
-Transformer.class: ClassAdapterFactory.java
+build/transformer/Transformer.class: ClassAdapterFactory.java
 
-%.class: %.java
-	$(JAVAC) -encoding "UTF-8" -cp asm-4.1.jar:. $^
+build/transformer/%.class: %.java
+	$(JAVAC) -encoding "UTF-8" -cp asm-4.1.jar:. $^ -d build
 
 clean:
 	rm -f *.class

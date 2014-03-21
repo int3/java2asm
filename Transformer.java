@@ -1,8 +1,10 @@
+package transformer;
+
 import java.lang.instrument.*;
 import java.security.*;
 import org.objectweb.asm.*;
 
-class Transformer implements ClassFileTransformer {
+public class Transformer implements ClassFileTransformer {
 
     public byte[] transform(ClassLoader loader, String className, Class<?> clazz,
                             ProtectionDomain pd, byte[] buffer) {
